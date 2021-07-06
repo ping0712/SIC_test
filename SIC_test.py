@@ -113,8 +113,8 @@ opcode = []
 testprog = open('(test)SIC.asm','r', encoding='utf8')
 progline = len(open('(test)SIC.asm','r', encoding='utf8').readlines())
 middle = open('middle.txt','w', encoding='utf8')
-warring_line = []
-warring_content = []
+warning_line = []
+warning_content = []
 pattern = '(.*)'
 
 f = open('opCode.txt', 'r')
@@ -243,8 +243,8 @@ while count <= progline :
                             middle.write(str(count)+' '+str(writelocctr(loc))+' '+str(data[0])+' '+str(data[1])+' '+str(data[2])+' '+str(optab(data[1],op,mn))+"\n")
                             loc = dec_to_hex(hex_to_dec(loc) + 3)
                 elif isstart == False and data[1] != 'START' :
-                    warring_line.append(count)
-                    warring_content.append('還沒start哦 ')
+                    warning_line.append(count)
+                    warning_content.append('還沒start哦 ')
                 else :
                     error_line.append(count)
                     error_content.append('已經start了哦')
@@ -300,18 +300,18 @@ while count <= progline :
                             error_line.append(count)
                             error_content.append('mnemonic error')
                 else :
-                    warring_line.append(count)
-                    warring_content.append('還沒start哦')
+                    warning_line.append(count)
+                    warning_content.append('還沒start哦')
             else :
                 error_line.append(count)
                 error_content.append('非3欄式')
         else :
-            warring_line.append(count)
-            warring_content.append('程式已經結束了哦')
+            warning_line.append(count)
+            warning_content.append('程式已經結束了哦')
 
-if len(warring_line) > 0 :
-    for i in range(len(warring_content)) :
-        print('Warring: line ' + str(warring_line[i]) + ' ' + warring_content[i])
+if len(warning_line) > 0 :
+    for i in range(len(warning_content)) :
+        print('warning: line ' + str(warning_line[i]) + ' ' + warning_content[i])
 
 # pass 2
 def writeloc(loc) : # 6位(不足前面補0)
